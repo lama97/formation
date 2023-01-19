@@ -6,7 +6,7 @@
 ```java
 for (Map.Entry<String,Integer> e : map.entrySet())
 	System.out.println("Key: " + e.getKey() + 
-										+ "Value: " + e.getValue());
+	+ "Value: " + e.getValue());
 										+ 
 ```
 
@@ -43,6 +43,7 @@ results.merge("Sara",  76,  (val1, val2) -> val1+val2);
 System.out.println("Updated HashMap: "  + results);
 ```
 **Updated HashMap 1:** {Amna=100, Ahmed=95, Sana=70, Sara=90, Ali=89} 
+
 **Updated HashMap 2:** {Amna=100, Ahmed=95, Sana=70, Sara=166, Ali=89}
 
 #### 5. putIfAbsent(K key, V value)
@@ -52,7 +53,66 @@ map.putIfAbsent("d",55555);
 ```
 
 ### Sort by Keys
+#### Using Java8 Lambdas (objects)
+```java
+Map<Employee,Integer> employeeMap = new TreeMap<>((o1,o2) -> (int) (o1.getSalary()- o2.getSalary()))
+```
+#### Using Java8 Streams (objects)
+employeeMap.entrySet.streams().
+					sorted(Map.Entry.comparingByKey(
+						(Comparator.comparing(Employee::getSalary))))
+
 ### Sort by Values
+#### Using Java8 Lambdas (primitives)
+```java
+        // Create a list from elements of HashMap
+ 		 List<Entry<String,Integer>> list = new ArrayList<>(entrySet);
+
+ 		 // Sort the list using lambda expression
+ 		 Collections.sort(list, (v1,v2) -> v1.getValue().compareTo(v2.getValue()));
+
+ 		 // put data from sorted list to hashmap
+        HashMap<String, Integer> temp
+            = new LinkedHashMap<String, Integer>();
+        for (Map.Entry<String, Integer> aa : list) {
+            temp.put(aa.getKey(), aa.getValue());
+        }
+
+```
+
+
+#### Using Java8 Streams
+##### Version 1 (used for primitive values)
+			hm.entrySet()
+                  .stream()
+                  .sorted((Map.Entry.comparingByValue()).forEach(System.out::println())
+```
+##### if you want it reversed ( add reversed() )
+```java
+			hm.entrySet()
+                  .stream()
+                  .sorted((Map.Entry.comparingByValue().reversed()).forEach(System.out::println())
+```
+##### Version 2 (used for primitive values)
+```java
+   HashMap<String, Integer> temp
+            = hm.entrySet()
+                  .stream()
+                  .sorted((v1, v2)
+                              -> v1.getValue().compareTo(
+                                  v2.getValue()))
+                  .collect(Collectors.toMap(
+                      Map.Entry::getKey,
+                      Map.Entry::getValue,
+                      (e1, e2) -> e1, LinkedHashMap::new));
+```
+##### Version 3 (used for objects)
+employeeMap.entrySet.streams().
+					sorted(Map.Entry.comparingByValue(
+						(Comparator.comparing(Employee::getSalary))))
+
+
+
 ## TreeMap (keys are sorted)
 ### TreeMap class implements SortedMap interface 
 ### Time Complexity = O(nlogn) ~ sorted 
