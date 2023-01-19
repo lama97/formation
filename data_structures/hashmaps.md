@@ -87,6 +87,7 @@ employeeMap.entrySet.streams().
                   .stream()
                   .sorted((Map.Entry.comparingByValue()).forEach(System.out::println())
 ```
+
 ##### if you want it reversed ( add reversed() )
 ```java
 			hm.entrySet()
@@ -107,10 +108,11 @@ employeeMap.entrySet.streams().
                       (e1, e2) -> e1, LinkedHashMap::new));
 ```
 ##### Version 3 (used for objects)
+```java
 employeeMap.entrySet.streams().
 					sorted(Map.Entry.comparingByValue(
 						(Comparator.comparing(Employee::getSalary))))
-
+```
 
 
 ## TreeMap (keys are sorted)
