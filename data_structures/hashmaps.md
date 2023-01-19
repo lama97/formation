@@ -57,10 +57,12 @@ map.putIfAbsent("d",55555);
 ```java
 Map<Employee,Integer> employeeMap = new TreeMap<>((o1,o2) -> (int) (o1.getSalary()- o2.getSalary()))
 ```
-#### Using Java8 Streams (objects)
+#### Using Java8 Streams (objects) 
+```java
 employeeMap.entrySet.streams().
 					sorted(Map.Entry.comparingByKey(
 						(Comparator.comparing(Employee::getSalary))))
+```						
 
 ### Sort by Values
 #### Using Java8 Lambdas (primitives)
@@ -83,12 +85,14 @@ employeeMap.entrySet.streams().
 
 #### Using Java8 Streams
 ##### Version 1 (used for primitive values)
+```java
 			hm.entrySet()
                   .stream()
-                  .sorted((Map.Entry.comparingByValue()).forEach(System.out::println())
+                  	.sorted((Map.Entry.comparingByValue()).forEach(System.out::println())
 ```
 
-##### if you want it reversed ( add reversed() )
+##### if you want it reversed ( add reversed() ) 
+
 ```java
 			hm.entrySet()
                   .stream()
