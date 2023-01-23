@@ -10,6 +10,7 @@ Output: 1 (if the overlapping was allowed, the answer would be 2)
 int countTargetString(String input, String target) {
     int count = 0;
     int index = input.indexOf(target);
+    if (target.equals("")) return count;
     while (index != -1) {
         count++;
         index = input.indexOf(target, index + target.length());
@@ -18,7 +19,20 @@ int countTargetString(String input, String target) {
 }
 
 ```
+instead of worrying about where to jump to get the next occurence of ```target```, you can chop the string after detecting each instance and keep looking:
+```java
+int countTargetString(String input, String target) {
+    int count = 0;
+    int index = input.indexOf(target);
+    if (target.equals("")) return count;
 
+    while (index != -1) {
+      input = input.substring(index+target.length());
+      count++;
+      index = input.indexOf(target);
+    }
+    return count;
+```
 ## removeTargetStringFTimes
 Given a string, a target string, and a frequency ```f```, remove the target ```f``` number of times from the beginning of the input string. If ```f``` exceeds the number of target strings appeared in the input string, do nothing.
 
