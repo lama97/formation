@@ -38,10 +38,10 @@ public  String removeTargetStringFTimes(String input, String target, int f) {
 }
 ```
 
-**alternative** instead of ```replaceFirst()```, you can split the string into seg1 & seg2 and concatenate them after removing the target from the input: 
-
+**alternative** instead of ```replaceFirst()```, you can split the string into seg1 & seg2 and concatenate them after removing the target from the input:
 ```java
-public static String removeTargetStringFTimes(String input, String target, int f) {
+public String removeTargetStringFTimes(String input, String target, int f) {
+
     String originalString = input;
     int count = 0;
     int index = input.indexOf(target);
@@ -54,8 +54,9 @@ public static String removeTargetStringFTimes(String input, String target, int f
     }
     if(count<f) return originalString;
     return input;
-}```
-
+}
+```
+ 
 ## alphabeticShift
 Given a string, your task is to replace each of its characters by the next one in the English alphabet; i.e. replace `a` with `b`, replace `b` with `c`, etc (`z` would be replaced by `a`).
 
