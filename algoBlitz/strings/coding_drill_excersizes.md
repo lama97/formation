@@ -23,17 +23,38 @@ int countTargetString(String input, String target) {
 Given a string, a target string, and a frequency ```f```, remove the target ```f``` number of times from the beginning of the input string. If ```f``` exceeds the number of target strings appeared in the input string, do nothing.
 
 ```java
-String removeTargetStringFTimes(String input, String target, int f) {
+public  String removeTargetStringFTimes(String input, String target, int f) {
+    String originalString = input;
     int count = 0;
     int index = input.indexOf(target);
-    while (index == 0 && count < f) {
-        input = input.substring(target.length());
-        count++;
-        index = input.indexOf(target);
+    while (index != -1 && count < f) {
+      input = input.replaceFirst(target,"");
+      count++;
+      index = input.indexOf(target);
     }
+
+    if(count<f) return originalString;
     return input;
 }
 ```
+
+**alternative** instead of ```replaceFirst()```, you can split the string into seg1 & seg2 and concatenate them after removing the target from the input: 
+
+```java
+public static String removeTargetStringFTimes(String input, String target, int f) {
+    String originalString = input;
+    int count = 0;
+    int index = input.indexOf(target);
+    while (index != -1 && count < f) {
+      String seg1 = input.substring(0,index);
+      String seg2 = input.substring(index+target.length());
+      input = seg1.concat(seg2);
+      count++;
+      index = input.indexOf(target);
+    }
+    if(count<f) return originalString;
+    return input;
+}```
 
 ## alphabeticShift
 Given a string, your task is to replace each of its characters by the next one in the English alphabet; i.e. replace `a` with `b`, replace `b` with `c`, etc (`z` would be replaced by `a`).
@@ -100,3 +121,5 @@ for (int i=0; i<list.size();i++){
 return result;
 }
 ```
+
+
