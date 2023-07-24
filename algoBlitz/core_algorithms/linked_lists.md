@@ -211,7 +211,7 @@ public  static  String  printAltH(ListNode  node, int  freq, int  level){
 ```
 ## Remove Target Node in Linked List
 
-### Recursion
+### Recursion (this solution only applies to removing the first encounter of "target")
 ```java
 public  static  ListNode  removeTargetNodeLLRecursive(ListNode  head, int  target){
 	if (head  ==  null) return  head;
